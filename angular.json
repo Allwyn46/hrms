@@ -22,8 +22,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["./node_modules/bootstrap/dist/css/bootstrap.min.css", "src/styles.css"],
-            "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.min.js"]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {
@@ -57,7 +56,8 @@
             "allowedHosts": ["all"],
             "headers": {
               "Access-Control-Allow-Origin": "*"
-            }
+            },
+            "proxyConfig": "./proxy.conf.json"
           },
           "configurations": {
             "production": {
