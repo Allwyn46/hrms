@@ -1,30 +1,46 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { LucideAngularModule, Home, Users, Briefcase } from 'lucide-angular';
+import { Component, OnInit } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { LucideAngularModule, Home, Users, Briefcase, Menu, User } from 'lucide-angular';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, CommonModule, LucideAngularModule],
+  imports: [RouterOutlet, CommonModule, LucideAngularModule, RouterLink],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
-export class Layout {
-  log(item: string) {
-    console.log('Navigate to:', item);
-  }
+export class Layout implements OnInit {
+  loggedinUser: any;
 
-  loggedinUser: any = localStorage.getItem('loggedinUser');
+  user = {
+    name: '',
+    email: '',
+  };
 
   constructor() {
-    console.log(this.loggedinUser);
+    const userString = localStorage.getItem('loggedinUser');
+    if (userString) {
+      this.loggedinUser = JSON.parse(userString);
+      console.log(this.loggedinUser);
+    }
+  }
+
+  ngOnInit() {
+    if (this.loggedinUser) {
+      this.user = {
+        name: this.loggedinUser.employeeName,
+        email: this.loggedinUser.emailId,
+      };
+    }
   }
 
   protected readonly HomeIcon = Home;
   protected readonly UsersIcon = Users;
   protected readonly BriefcaseIcon = Briefcase;
+  protected readonly MenuIcon = Menu;
+  protected readonly SingleUserIcon = User;
 
-  isCollapsed = false;
+  isCollapsed = true;
 
   menuItems = [
     { label: 'Home', icon: this.HomeIcon, link: 'dashboard', active: true },
@@ -32,10 +48,10 @@ export class Layout {
     { label: 'Leave', icon: this.BriefcaseIcon, link: 'leave', active: false },
   ];
 
-  user = {
-    name: this.loggedinUser.employeeName,
-    email: this.loggedinUser.emailId,
-  };
+  setActive(selectedItem: any): void {
+    this.menuItems.forEach((item) => (item.active = false));
+    selectedItem.active = true;
+  }
 
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
