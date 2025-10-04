@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { toast } from 'ngx-sonner';
 import { ZardButtonComponent } from '../../../../n/button/button.component';
+import { ZardToastComponent } from 'n/toast/toast.component';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [ZardButtonComponent],
+  imports: [ZardButtonComponent, ZardToastComponent],
   templateUrl: './dashboard.html',
   styleUrl: './dashboard.css',
 })
