@@ -33,7 +33,7 @@
 
     <!-- User Profile -->
     <div class="p-4 border-t border-gray-700">
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 cursor-pointer" z-dropdown [zDropdownMenu]="menu">
         <div
           class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0"
         >
@@ -52,9 +52,31 @@
 
   <!-- Main Content Area -->
   <main class="flex-1 overflow-y-auto">
-    <div class="text-gray-400 bg-black p-3 w-full">hello</div>
+    <div class="text-gray-400 bg-black p-3 w-full flex justify-between items-center">
+      <div>
+        hello
+      </div>
+      <div>
+
+      </div>
+      <div>
+
+      </div>
+    </div>
     <div class="p-8 text-white h-[94.5vh] bg-[#0A0A0A]">
       <router-outlet />
     </div>
   </main>
 </div>
+
+<z-dropdown-menu-content #menu="zDropdownMenuContent" class="w-56">
+      <z-dropdown-menu-item (click)="onProfile()">
+        Profile
+      </z-dropdown-menu-item>
+
+      <z-divider zSpacing="sm" class="-mx-1"></z-divider>
+
+      <z-dropdown-menu-item (click)="onLogOff()">
+        Log out
+      </z-dropdown-menu-item>
+</z-dropdown-menu-content>

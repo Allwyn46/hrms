@@ -1,8 +1,14 @@
-import { ChangeDetectionStrategy, Component, computed, input, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  ViewEncapsulation,
+} from '@angular/core';
 import type { ClassValue } from 'clsx';
 
 import { dividerVariants, ZardDividerVariants } from './divider.variants';
-import { mergeClasses } from '@shared/utils/merge-classes';
+import { mergeClasses } from '../merge-classes';
 
 @Component({
   selector: 'z-divider',

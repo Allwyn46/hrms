@@ -2,10 +2,21 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { LucideAngularModule, Home, Users, Briefcase, Menu, User } from 'lucide-angular';
+import { ZardDropdownModule } from 'n/dropdown/dropdown.module';
+import { ZardDividerComponent } from 'n/divider/divider.component';
+import { ZardButtonComponent } from 'n/button/button.component';
 
 @Component({
   selector: 'app-layout',
-  imports: [RouterOutlet, CommonModule, LucideAngularModule, RouterLink],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    LucideAngularModule,
+    RouterLink,
+    ZardDropdownModule,
+    ZardDividerComponent,
+    ZardButtonComponent,
+  ],
   templateUrl: './layout.html',
   styleUrl: './layout.css',
 })
@@ -55,5 +66,46 @@ export class Layout implements OnInit {
 
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  onLogOff() {
+    localStorage.removeItem('loggedinUser');
+    window.location.reload();
+  }
+
+  onProfile() {
+    console.log('Profile clicked');
+  }
+
+  onBilling() {
+    console.log('Billing clicked');
+  }
+
+  onSettings() {
+    console.log('Settings clicked');
+  }
+
+  onKeyboardShortcuts() {
+    console.log('Keyboard shortcuts clicked');
+  }
+
+  onTeam() {
+    console.log('Team clicked');
+  }
+
+  onNewTeam() {
+    console.log('New Team clicked');
+  }
+
+  onGitHub() {
+    console.log('GitHub clicked');
+  }
+
+  onSupport() {
+    console.log('Support clicked');
+  }
+
+  onLogout() {
+    console.log('Log out clicked');
   }
 }
