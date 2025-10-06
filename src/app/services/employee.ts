@@ -13,6 +13,10 @@ export class Employee {
     return this.http.post('/api/EmployeeLeave/Login', formData);
   }
 
+  getAllEmployees() {
+    return this.http.get('/api/EmployeeLeave/GetEmployees');
+  }
+
   showSuccessToast(title: string, desc: string) {
     toast.success(title, {
       description: desc,
