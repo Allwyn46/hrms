@@ -27,12 +27,12 @@ import { StopPropagation } from 'src/app/directives/stop-propagation';
     ZardSelectComponent,
     ZardSelectItemComponent,
     StopPropagation,
+    ZardButtonComponent,
   ],
   templateUrl: './employee-add-sheet.html',
   styleUrl: './employee-add-sheet.css',
 })
 export class EmployeeAddSheet implements OnInit {
-  private zData: iSheetData = inject(Z_MODAL_DATA);
   employeeService = inject(Employee);
   DepartmentList$: Observable<any[]> = new Observable<any[]>();
   RolesList$: Observable<any[]> = new Observable<any[]>();
@@ -78,7 +78,7 @@ export class EmployeeSheetComponent {
   private sheetService = inject(ZardSheetService);
 
   openSheet() {
-    this.sheetService.create({
+    const sheetRef = this.sheetService.create({
       zTitle: 'Add Employee',
       zDescription: `Fill the necesary fields for employee here. Click save when you're done.`,
       zContent: EmployeeAddSheet,
@@ -86,7 +86,7 @@ export class EmployeeSheetComponent {
         name: 'Matheus Ribeiro',
         username: '@ribeiromatheus.dev',
       } as iSheetData,
-      zOkText: 'Save changes',
+      zOkText: null,
       zOnOk: (instance) => {
         console.log('Form submitted:', instance.form.value);
         instance.createEmployee();
