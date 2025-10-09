@@ -48,6 +48,11 @@ export class Employee {
     return this.http.delete('/api/EmployeeLeave/DeleteEmployee', { params });
   }
 
+  getEmployeeLeaves(id: any) {
+    const params = new HttpParams().set('id', id);
+    return this.http.get('/api/EmployeeLeave/GetAllLeavesByEmployeeId', { params });
+  }
+
   showSuccessToast(title: string, desc: string) {
     toast.success(title, {
       description: desc,

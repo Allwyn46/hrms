@@ -39,3 +39,16 @@ export interface EmployeeCreateForm {
   gender: FormControl<string>;
   role: FormControl<string>;
 }
+
+export interface EmployeeLeaveType {
+  details: string;
+  employeeId: number;
+  employeeName: string;
+  fromDate: string;
+  leaveId: number;
+  leaveType: string;
+  noOfDays: number;
+  toDate: string;
+  approvedDate: string;
+  isApproved: boolean;
+}

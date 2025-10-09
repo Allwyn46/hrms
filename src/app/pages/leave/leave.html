@@ -1,1 +1,68 @@
-<p>leave works!</p>
+<div class="w-full flex justify-between items-center">
+  <div>
+    <h2 class="text-[24px] font-bold">Leaves</h2>
+  </div>
+</div>
+<div class="w-full mt-5">
+  <div class="overflow-hidden rounded-md border">
+    <table z-table>
+      <thead z-table-header>
+        <tr z-table-row>
+          <th z-table-head>ID</th>
+          <th z-table-head>Name</th>
+          <th z-table-head>From Date</th>
+          <th z-table-head>To Date</th>
+          <th z-table-head>No of Days</th>
+          <th z-table-head>Leave Type</th>
+          <th z-table-head>Details</th>
+          <th z-table-head>Status</th>
+        </tr>
+      </thead>
+      <tbody z-table-body>
+        @for (leave of leaveList; track $index) {
+          <tr z-table-row>
+            <td z-table-cell>
+              {{ leave.leaveId }}
+            </td>
+            <td z-table-cell>
+              <div>{{ leave.employeeName }}</div>
+            </td>
+            <td z-table-cell>
+              <div>{{ leave.fromDate }}</div>
+            </td>
+            <td z-table-cell>
+              {{ leave.toDate }}
+            </td>
+            <td z-table-cell>
+              {{ leave.noOfDays }}
+            </td>
+            <td z-table-cell>
+              {{ leave.leaveType }}
+            </td>
+            <td z-table-cell>
+              {{ leave.details }}
+            </td>
+
+            <td z-table-cell>
+              <z-badge [zType]="getStatusVariant(leave.isApproved)">
+                {{ getStatusText(leave.isApproved) }}
+              </z-badge>
+            </td>
+
+            <td z-table-cell>
+              <div class="flex items-center gap-2">
+                <z-button zType="destructive" (click)="showDialog(employee.employeeId)">
+                  Delete
+                </z-button>
+              </div>
+            </td>
+          </tr>
+        } @empty {
+          <tr z-table-row>
+            <td z-table-cell [attr.colspan]="8" class="h-24 text-center">No results.</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

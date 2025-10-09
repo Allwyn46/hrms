@@ -10,24 +10,13 @@ import {
   ZardTableRowComponent,
 } from 'n/table/table.component';
 import { Employee as EmployeeService } from '../../services/employee';
-import {
-  DepartmentListFormat,
-  EmployeeApiResponse,
-  EmployeeListData,
-} from 'src/app/models/Employee.model';
+import { EmployeeApiResponse, EmployeeListData } from 'src/app/models/Employee.model';
 import {
   EmployeeAddSheet,
   EmployeeSheetComponent,
 } from 'src/app/components/employee-add-sheet/employee-add-sheet';
 import { EmployeeEditSheetComponent } from 'src/app/components/employee-edit-sheet/employee-edit-sheet';
 import { ZardAlertDialogService } from 'n/alert-dialog/alert-dialog.service';
-
-export interface Payment {
-  id: string;
-  amount: number;
-  status: 'pending' | 'processing' | 'success' | 'failed';
-  email: string;
-}
 
 @Component({
   selector: 'app-employee',
