@@ -2,7 +2,7 @@ import type { ClassValue } from 'clsx';
 
 import { computed, Directive, ElementRef, inject, input } from '@angular/core';
 
-import { mergeClasses, transform } from '@shared/utils/merge-classes';
+import { mergeClasses, transform } from '../merge-classes';
 import { inputVariants, ZardInputVariants } from './input.variants';
 
 @Directive({
@@ -24,6 +24,14 @@ export class ZardInputDirective {
   readonly class = input<ClassValue>('');
 
   protected readonly classes = computed(() =>
-    mergeClasses(inputVariants({ zType: !this.isTextarea ? 'default' : 'textarea', zSize: this.zSize(), zStatus: this.zStatus(), zBorderless: this.zBorderless() }), this.class()),
+    mergeClasses(
+      inputVariants({
+        zType: !this.isTextarea ? 'default' : 'textarea',
+        zSize: this.zSize(),
+        zStatus: this.zStatus(),
+        zBorderless: this.zBorderless(),
+      }),
+      this.class(),
+    ),
   );
 }

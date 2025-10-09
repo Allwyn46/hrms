@@ -1,4 +1,12 @@
-<div class="w-full">
+<div class="w-full flex justify-between items-center">
+  <div>
+    <h3>Employees</h3>
+  </div>
+  <div>
+    <sheet-trigger></sheet-trigger>
+  </div>
+</div>
+<div class="w-full mt-5">
   <div class="overflow-hidden rounded-md border">
     <table z-table>
       <thead z-table-header>
@@ -13,25 +21,31 @@
         </tr>
       </thead>
       <tbody z-table-body>
-        @for (payment of payments; track payment.id) {
+        @for (employee of employeeList; track $index) {
           <tr z-table-row>
             <td z-table-cell>
-              <z-badge [zType]="getStatusVariant(payment.status)">
-                {{ payment.status }}
-              </z-badge>
+                {{employee.employeeId}}
             </td>
             <td z-table-cell>
-              <div class="lowercase">{{ payment.email }}</div>
+              <div>{{ employee.employeeName }}</div>
             </td>
             <td z-table-cell>
-              <div class="text-center font-medium">{{ formatCurrency(payment.amount) }}</div>
+              <div class="lowercase">{{ employee.emailId }}</div>
+            </td>
+            <td z-table-cell>
+              {{employee.contactNo}}
+            </td>
+            <td z-table-cell>
+              {{employee.deptName}}
+            </td>
+            <td>
+              {{employee.role}}
             </td>
             <td z-table-cell>
               <div class="flex items-center gap-2">
                 <z-button
                   zType="ghost"
                   zSize="icon"
-                  (click)="copyPaymentId(payment.id)"
                   title="Copy payment ID"
                 >
                   <div class="icon-copy"></div>
@@ -39,7 +53,6 @@
                 <z-button
                   zType="ghost"
                   zSize="icon"
-                  (click)="viewDetails(payment)"
                   title="View details"
                 >
                   <div class="icon-eye"></div>
