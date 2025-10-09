@@ -1,17 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
-import {
-  ReactiveFormsModule,
-  FormGroup,
-  FormControl,
-  FormsModule,
-  Validators,
-} from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ZardButtonComponent } from 'n/button/button.component';
-import { Z_MODAL_DATA, ZardSheetService } from 'n/sheet/sheet.service';
+import { ZardSheetService } from 'n/sheet/sheet.service';
 import { ZardInputDirective } from 'n/input/input.directive';
 import { ZardSheetModule } from 'n/sheet/sheet.module';
 import { EmployeeCreateForm, iSheetData } from 'src/app/models/Employee.model';
-import { Observable } from 'rxjs';
+import { Observable, window } from 'rxjs';
 import { Employee } from 'src/app/services/employee';
 import { ZardSelectComponent } from 'n/select/select.component';
 import { ZardSelectItemComponent } from 'n/select/select-item.component';
@@ -53,12 +47,13 @@ export class EmployeeAddSheet implements OnInit {
     role: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
   });
 
-  public createEmployee() {
+  createEmployee() {
     const formData = this.form.value;
     this.employeeService.storeEmployee(formData).subscribe({
       next: (response: any) => {
         if (response?.Result == true) {
           this.employeeService.showSuccessToast('Success', 'Employee created successfully');
+          this.employeeService.getAllEmployees();
         }
       },
       error: (error) => {
@@ -78,7 +73,7 @@ export class EmployeeSheetComponent {
   private sheetService = inject(ZardSheetService);
 
   openSheet() {
-    const sheetRef = this.sheetService.create({
+    this.sheetService.create({
       zTitle: 'Add Employee',
       zDescription: `Fill the necesary fields for employee here. Click save when you're done.`,
       zContent: EmployeeAddSheet,
@@ -87,6 +82,7 @@ export class EmployeeSheetComponent {
         username: '@ribeiromatheus.dev',
       } as iSheetData,
       zOkText: null,
+      zCancelText: null,
       zOnOk: (instance) => {
         console.log('Form submitted:', instance.form.value);
         instance.createEmployee();

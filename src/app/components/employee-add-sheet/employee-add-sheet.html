@@ -79,7 +79,7 @@
     >
       <option value="0" class="text-gray-900" disabled selected>Select department</option>
       @for (item of DepartmentList$ | async; track $index) {
-        <option value="item.deptId">{{item.deptName}}</option>
+        <option value={{item.deptId}}>{{item.deptName}}</option>
       }
     </select>
     @if (form.controls['deptId'].touched) {
@@ -145,12 +145,12 @@
     >
       <option value="" class="text-gray-900" disabled selected hidden>Select role</option>
       @for (item of RolesList$ | async; track $index) {
-        <option value="item">{{item}}</option>
+        <option value={{item}}>{{item}}</option>
       }
     </select>
   </div>
 
   <div class="grid gap-3">
-    <button z-button zType="secondary" >Save Changes</button>
+    <button z-button zType="secondary" [disabled]="form.invalid" (click)="createEmployee()">Save Changes</button>
   </div>
 </form>

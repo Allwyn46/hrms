@@ -47,8 +47,9 @@
                   zType="ghost"
                   zSize="icon"
                   title="Copy payment ID"
+                  (click)="onEdit(employee)"
                 >
-                  <div class="icon-copy"></div>
+                  Edit
                 </z-button>
                 <z-button
                   zType="ghost"
@@ -62,7 +63,7 @@
           </tr>
         } @empty {
           <tr z-table-row>
-            <td z-table-cell [attr.colspan]="4" class="h-24 text-center">No results.</td>
+            <td z-table-cell [attr.colspan]="7" class="h-24 text-center">No results.</td>
           </tr>
         }
       </tbody>

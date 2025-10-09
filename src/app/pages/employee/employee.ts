@@ -63,42 +63,7 @@ export class Employee implements OnInit {
     });
   }
 
-  payments: Payment[] = [
-    {
-      id: 'm5gr84i9',
-      amount: 316,
-      status: 'success',
-      email: 'ken99@example.com',
-    },
-    {
-      id: '3u1reuv4',
-      amount: 242,
-      status: 'success',
-      email: 'Abe45@example.com',
-    },
-  ];
-
-  formatCurrency(amount: number): string {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    }).format(amount);
-  }
-
-  getStatusVariant(status: Payment['status']): 'default' | 'secondary' | 'destructive' | 'outline' {
-    switch (status) {
-      case 'success':
-        return 'default';
-      case 'processing':
-        return 'secondary';
-      case 'failed':
-        return 'destructive';
-      case 'pending':
-        return 'outline';
-      default:
-        return 'secondary';
-    }
-  }
+  onEdit(item: any) {}
 
   copyPaymentId(id: string): void {
     navigator.clipboard.writeText(id);
