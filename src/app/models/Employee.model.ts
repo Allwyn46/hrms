@@ -52,3 +52,15 @@ export interface EmployeeLeaveType {
   approvedDate: string;
   isApproved: boolean;
 }
+
+export interface CreateLeaveFormat {
+  leaveId: number;
+  employeeId: number;
+  fromDate: string;
+  toDate: string;
+  noOfDays: number;
+  leaveType: string;
+  details: string;
+  isApproved: boolean;
+  approvedDate: string;
+}

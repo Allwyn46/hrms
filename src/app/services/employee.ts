@@ -53,6 +53,10 @@ export class Employee {
     return this.http.get('/api/EmployeeLeave/GetAllLeavesByEmployeeId', { params });
   }
 
+  addEmployeeleave(formData: any) {
+    return this.http.post('/api/EmployeeLeave/AddLeave', formData);
+  }
+
   showSuccessToast(title: string, desc: string) {
     toast.success(title, {
       description: desc,
