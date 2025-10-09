@@ -69,9 +69,11 @@ export class Employee implements OnInit {
 
   deleteEmployee(id: any) {
     this.employeeService.deleteEmployee(id).subscribe({
-      next: (response: EmployeeApiResponse) => {
-        if (response.result == true) {
+      next: (response: any) => {
+        if (response?.result == true) {
           this.employeeService.showSuccessToast('Success', 'Employee Deleted Successfully');
+          this.fetchEmployees();
+          window.location.reload();
         }
       },
       error: (error) => {
@@ -81,14 +83,16 @@ export class Employee implements OnInit {
     });
   }
 
-  showDialog() {
+  showDialog(id: any) {
     this.alertDialogService.confirm({
       zTitle: 'Are you absolutely sure?',
       zDescription:
         'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
       zOkText: 'Continue',
       zCancelText: 'Cancel',
-      zOnOk: () => {},
+      zOnOk: () => {
+        this.deleteEmployee(id);
+      },
     });
   }
 }

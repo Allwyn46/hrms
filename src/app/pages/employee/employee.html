@@ -1,6 +1,6 @@
 <div class="w-full flex justify-between items-center">
   <div>
-    <h3>Employees</h3>
+    <h2 class="text-[24px] font-bold">Employees</h2>
   </div>
   <div>
     <sheet-trigger></sheet-trigger>
@@ -45,11 +45,10 @@
               <div class="flex items-center gap-2">
                 <edit-sheet-trigger [employee]="employee"></edit-sheet-trigger>
                 <z-button
-                  zType="ghost"
-                  zSize="icon"
-                  title="View details"
+                  zType="destructive"
+                  (click)="showDialog(employee.employeeId)"
                 >
-                  <div class="icon-eye"></div>
+                  Delete
                 </z-button>
               </div>
             </td>
