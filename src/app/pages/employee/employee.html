@@ -43,14 +43,7 @@
             </td>
             <td z-table-cell>
               <div class="flex items-center gap-2">
-                <z-button
-                  zType="ghost"
-                  zSize="icon"
-                  title="Copy payment ID"
-                  (click)="onEdit(employee)"
-                >
-                  Edit
-                </z-button>
+                <edit-sheet-trigger [employee]="employee"></edit-sheet-trigger>
                 <z-button
                   zType="ghost"
                   zSize="icon"

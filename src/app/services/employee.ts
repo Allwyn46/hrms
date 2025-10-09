@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { toast } from 'ngx-sonner';
 import { ZardToastComponent } from '../../../n/toast/toast.component';
@@ -37,6 +37,15 @@ export class Employee {
 
   storeEmployee(formData: any) {
     return this.http.post('/api/EmployeeLeave/CreateEmployee', formData);
+  }
+
+  updateEmployee(formData: any) {
+    return this.http.put('/api/EmployeeLeave/UpdateEmployee', formData);
+  }
+
+  deleteEmployee(id: any) {
+    const params = new HttpParams().set('id', id);
+    return this.http.delete('/api/EmployeeLeave/DeleteEmployee', { params });
   }
 
   showSuccessToast(title: string, desc: string) {

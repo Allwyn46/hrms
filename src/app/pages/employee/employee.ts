@@ -19,6 +19,8 @@ import {
   EmployeeAddSheet,
   EmployeeSheetComponent,
 } from 'src/app/components/employee-add-sheet/employee-add-sheet';
+import { EmployeeEditSheetComponent } from 'src/app/components/employee-edit-sheet/employee-edit-sheet';
+import { ZardAlertDialogService } from 'n/alert-dialog/alert-dialog.service';
 
 export interface Payment {
   id: string;
@@ -40,6 +42,7 @@ export interface Payment {
     ZardTableRowComponent,
     EmployeeAddSheet,
     EmployeeSheetComponent,
+    EmployeeEditSheetComponent,
   ],
   templateUrl: './employee.html',
   styleUrl: './employee.css',
@@ -47,6 +50,7 @@ export interface Payment {
 export class Employee implements OnInit {
   employeeService = inject(EmployeeService);
   employeeList: EmployeeListData[] = [];
+  private alertDialogService = inject(ZardAlertDialogService);
 
   ngOnInit(): void {
     this.fetchEmployees();
@@ -63,14 +67,28 @@ export class Employee implements OnInit {
     });
   }
 
-  onEdit(item: any) {}
-
-  copyPaymentId(id: string): void {
-    navigator.clipboard.writeText(id);
-    console.log('Payment ID copied:', id);
+  deleteEmployee(id: any) {
+    this.employeeService.deleteEmployee(id).subscribe({
+      next: (response: EmployeeApiResponse) => {
+        if (response.result == true) {
+          this.employeeService.showSuccessToast('Success', 'Employee Deleted Successfully');
+        }
+      },
+      error: (error) => {
+        console.log(error);
+        this.employeeService.showErrorToast('Error', 'Failed to delete employee');
+      },
+    });
   }
 
-  viewDetails(payment: Payment): void {
-    console.log('View payment details:', payment);
+  showDialog() {
+    this.alertDialogService.confirm({
+      zTitle: 'Are you absolutely sure?',
+      zDescription:
+        'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+      zOkText: 'Continue',
+      zCancelText: 'Cancel',
+      zOnOk: () => {},
+    });
   }
 }

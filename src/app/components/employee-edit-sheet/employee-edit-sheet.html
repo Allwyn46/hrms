@@ -1,1 +1,140 @@
-<p>employee-edit-sheet works!</p>
+<form [formGroup]="editform" class="grid flex-1 auto-rows-min gap-6 px-4">
+  <div class="grid gap-3">
+    <label
+      for="employeeName"
+      class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+      >Employee Name</label
+    >
+    <input
+      z-input
+      required
+      formControlName="employeeName"
+      placeholder="Enter Name"
+      class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+    />
+    @if (editform.controls['employeeName'].touched) {
+      <div>
+        @if (editform.controls['employeeName'].errors?.['required']) {
+          <span class="text-red-400"> This Field is Required </span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="grid gap-3">
+    <label
+      for="contactNo"
+      class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+      >Contact Number</label
+    >
+    <input
+      z-input
+      required
+      formControlName="contactNo"
+      placeholder="Enter contact number"
+      class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+    />
+    @if (editform.controls['contactNo'].touched) {
+      <div>
+        @if (editform.controls['contactNo'].errors?.['required']) {
+          <span class="text-red-400"> This Field is Required </span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="grid gap-3">
+    <label
+      for="emailId"
+      class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+      >Email ID</label
+    >
+    <input
+      z-input
+      required
+      formControlName="emailId"
+      placeholder="Enter email"
+      class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive"
+    />
+    @if (editform.controls['emailId'].touched) {
+      <div>
+        @if (editform.controls['emailId'].errors?.['required']) {
+          <span class="text-red-400"> This Field is Required </span>
+        }
+      </div>
+    }
+  </div>
+
+  <div class="relative">
+    <label
+      for="deptId"
+      class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+      >Department</label
+    >
+    <select
+      id="department"
+      placeholder="Select Department"
+      formControlName="deptId"
+      class="appearance-none mt-2 w-full h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus:outline-none focus:border-ring focus:ring-2 focus:ring-ring/50 dark:bg-input/30 dark:text-foreground/90 cursor-pointer"
+    >
+      <option value="0" class="text-gray-900" disabled selected>Select department</option>
+      @for (item of DepartmentList$ | async; track $index) {
+        <option value="{{ item.deptId }}">{{ item.deptName }}</option>
+      }
+    </select>
+    @if (editform.controls['deptId'].touched) {
+      <div>
+        @if (editform.controls['deptId'].errors?.['required']) {
+          <span class="text-red-400"> This Field is Required </span>
+        }
+      </div>
+    }
+  </div>
+
+  <!-- <div class="grid gap-3"> -->
+  <!--   <label -->
+  <!--     for="password" -->
+  <!--     class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50" -->
+  <!--     >Password</label -->
+  <!--   > -->
+  <!--   <input -->
+  <!--     z-input -->
+  <!--     required -->
+  <!--     formControlName="password" -->
+  <!--     placeholder="Enter password" -->
+  <!--     class="file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive" -->
+  <!--   /> -->
+  <!--   @if (editform.controls['password'].touched) { -->
+  <!--     <div> -->
+  <!--       @if (editform.controls['password'].errors?.['required']) { -->
+  <!--         <span class="text-red-400"> This Field is Required </span> -->
+  <!--       } -->
+  <!--     </div> -->
+  <!--   } -->
+  <!-- </div> -->
+
+  <div class="relative">
+    <label
+      for="role"
+      class="flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50"
+      >Role</label
+    >
+    <select
+      id="role"
+      placeholder="Select Role"
+      formControlName="role"
+      class="appearance-none mt-2 w-full h-9 rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus:outline-none focus:border-ring focus:ring-2 focus:ring-ring/50 dark:bg-input/30 dark:text-foreground/90 cursor-pointer"
+    >
+      <option value="" class="text-gray-900" disabled selected hidden>Select role</option>
+      @for (item of RolesList$ | async; track $index) {
+        <option value="{{ item }}">{{ item }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="grid gap-3">
+    <button z-button zType="secondary" [disabled]="editform.invalid" (click)="updateEmployee()">
+      Save Changes
+    </button>
+  </div>
+</form>
