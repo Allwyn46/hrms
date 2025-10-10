@@ -11,6 +11,7 @@ import {
 } from 'n/table/table.component';
 import { ZardBadgeComponent } from 'n/badge/badge.component';
 import { ZardButtonComponent } from 'n/button/button.component';
+import { EmployeeLeaveSheetComponent } from 'src/app/components/leave-add-sheet/leave-add-sheet';
 
 @Component({
   selector: 'app-leave',
@@ -23,6 +24,7 @@ import { ZardButtonComponent } from 'n/button/button.component';
     ZardTableHeaderComponent,
     ZardTableRowComponent,
     ZardButtonComponent,
+    EmployeeLeaveSheetComponent,
   ],
   templateUrl: './leave.html',
   styleUrl: './leave.css',

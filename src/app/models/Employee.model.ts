@@ -54,13 +54,13 @@ export interface EmployeeLeaveType {
 }
 
 export interface CreateLeaveFormat {
-  leaveId: number;
-  employeeId: number;
-  fromDate: string;
-  toDate: string;
-  noOfDays: number;
-  leaveType: string;
-  details: string;
-  isApproved: boolean;
-  approvedDate: string;
+  leaveId: FormControl<number>;
+  employeeId: FormControl<number>;
+  fromDate: FormControl<string>;
+  toDate: FormControl<string>;
+  noOfDays: FormControl<number>;
+  leaveType: FormControl<string>;
+  details: FormControl<string>;
+  isApproved: FormControl<boolean>;
+  approvedDate: FormControl<string>;
 }

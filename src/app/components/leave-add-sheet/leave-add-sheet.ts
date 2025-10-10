@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ZardButtonComponent } from 'n/button/button.component';
 import { ZardInputDirective } from 'n/input/input.directive';
+import { ZardSheetModule } from 'n/sheet/sheet.module';
+import { ZardSheetService } from 'n/sheet/sheet.service';
 import { CreateLeaveFormat } from 'src/app/models/Employee.model';
 import { Employee } from 'src/app/services/employee';
 
@@ -44,5 +46,33 @@ export class LeaveAddSheet implements OnInit {
     isApproved: new FormControl(false, { nonNullable: true }),
     approvedDate: new FormControl('', { nonNullable: true }),
     employeeId: new FormControl(this.user.id, { nonNullable: true }),
+    leaveId: new FormControl(0, { nonNullable: true }),
+    leaveType: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    noOfDays: new FormControl(0, { nonNullable: true }),
   });
+
+  createLeave() {}
+}
+
+@Component({
+  selector: 'leave-sheet-trigger',
+  standalone: true,
+  imports: [ZardButtonComponent, ZardSheetModule],
+  template: ` <button z-button zType="secondary" (click)="openSheet()">Apply Leave</button> `,
+})
+export class EmployeeLeaveSheetComponent {
+  private sheetService = inject(ZardSheetService);
+
+  openSheet() {
+    this.sheetService.create({
+      zTitle: 'Add Employee',
+      zDescription: `Fill the necesary fields for employee here. Click save when you're done.`,
+      zContent: LeaveAddSheet,
+      zOkText: null,
+      zCancelText: null,
+      zOnOk: (instance) => {
+        console.log('Form submitted:');
+      },
+    });
+  }
 }
