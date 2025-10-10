@@ -37,9 +37,12 @@ export class LeaveAddSheet implements OnInit {
         id: this.loggedinUser.employeeId,
       };
     }
+
+    this.leaveForm.get('fromDate')?.valueChanges.subscribe(() => this.calculateDays());
+    this.leaveForm.get('toDate')?.valueChanges.subscribe(() => this.calculateDays());
   }
 
-  leaveForm = new FormGroup<CreateLeaveFormat>({
+  leaveForm: FormGroup = new FormGroup<CreateLeaveFormat>({
     details: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     fromDate: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
     toDate: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
@@ -51,7 +54,27 @@ export class LeaveAddSheet implements OnInit {
     noOfDays: new FormControl(0, { nonNullable: true }),
   });
 
-  createLeave() {}
+  calculateDays() {
+    const from = this.leaveForm.get('fromDate')?.value;
+    const to = this.leaveForm.get('toDate')?.value;
+
+    if (from && to) {
+      const fromDate = new Date(from);
+      const toDate = new Date(to);
+
+      const diffTime = toDate.getTime() - fromDate.getTime();
+
+      const diffDays = diffTime >= 0 ? Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1 : 0;
+
+      this.leaveForm.get('noOfDays')?.setValue(diffDays, { emitEvent: false });
+    } else {
+      this.leaveForm.get('noOfDays')?.setValue(0, { emitEvent: false });
+    }
+  }
+
+  createLeave() {
+    const formData = this.leaveForm.value;
+  }
 }
 
 @Component({
