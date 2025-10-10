@@ -36,6 +36,7 @@ export class LeaveAddSheet implements OnInit {
         name: this.loggedinUser.employeeName,
         id: this.loggedinUser.employeeId,
       };
+      this.leaveForm.get('employeeId')?.setValue(this.user.id);
     }
 
     this.leaveForm.get('fromDate')?.valueChanges.subscribe(() => this.calculateDays());
@@ -74,6 +75,21 @@ export class LeaveAddSheet implements OnInit {
 
   createLeave() {
     const formData = this.leaveForm.value;
+    this.employeeService.addEmployeeleave(formData).subscribe({
+      next: (response: any) => {
+        if (response?.result == true) {
+          this.employeeService.showSuccessToast('Success', 'Leave Applied Successfully');
+          setTimeout(() => {
+            this.employeeService.getEmployeeLeaves(this.user.id);
+            window.location.reload();
+          }, 1000);
+        }
+      },
+      error: (error) => {
+        this.employeeService.showErrorToast('Error', 'Failed to apply leave');
+        console.log(error);
+      },
+    });
   }
 }
 
